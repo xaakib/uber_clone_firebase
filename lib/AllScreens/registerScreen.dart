@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:uber_clone_firebase/AllScreens/loginScreen.dart';
 
 class Registerscreen extends StatelessWidget {
+  static const String idScreen = "register";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,11 +12,12 @@ class Registerscreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: SingleChildScrollView(
           child: Container(
-            alignment: Alignment.center,
+            alignment: Alignment.bottomCenter,
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  height: 45,
+                  height: 20,
                 ),
                 Image(
                     image: AssetImage("images/logo.png"),
@@ -101,7 +105,8 @@ class Registerscreen extends StatelessWidget {
                         style: TextStyle(color: Colors.pink),
                       ),
                       onPressed: () {
-                        print("Clicked Login here");
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, LoginScreen.idScreen, (route) => false);
                       },
                     ),
                   ],

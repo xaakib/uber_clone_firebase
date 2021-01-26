@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:uber_clone_firebase/AllScreens/registerScreen.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const String idScreen = "login";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +83,8 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.pink),
                       ),
                       onPressed: () {
-                        print("Clicked register here");
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, Registerscreen.idScreen, (route) => false);
                       },
                     ),
                   ],
