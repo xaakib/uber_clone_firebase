@@ -62,7 +62,9 @@ flutter:
     - family: Brand-Regular
       fonts:
         - asset: fonts/bolt-regular.ttf
+        
     - family: Brand-Bold
+      fonts:
         - asset: fonts/bolt-semibold.ttf
   #         weight: 700
   #
