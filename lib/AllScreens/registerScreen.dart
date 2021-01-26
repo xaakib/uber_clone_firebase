@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uber_clone_firebase/AllScreens/loginScreen.dart';
 
 class Registerscreen extends StatelessWidget {
@@ -99,7 +100,23 @@ class Registerscreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24)),
                   onPressed: () {
-                    registernewuser(context);
+                    if (nameTextEditingController.text.length < 4) {
+                      displayToastMassage(
+                          "name must be atlast 3 Characters", context);
+                    }
+                    if (!emailTextEditingController.text.contains("@")) {
+                      displayToastMassage(
+                          "Email Address is not Valid", context);
+                    }
+                    if (phoneTextEditingController.text.isEmpty) {
+                      displayToastMassage("Phone number is mandatory", context);
+                    }
+                    if (passwordTextEditingController.text.length < 7) {
+                      displayToastMassage(
+                          "Password must be atlast 6 Charactars", context);
+                    } else {
+                      registernewuser(context);
+                    }
                   },
                 ),
                 SizedBox(
@@ -145,5 +162,9 @@ class Registerscreen extends StatelessWidget {
     } else {
       //error occured - display error msg
     }
+  }
+
+  displayToastMassage(String massage, BuildContext context) {
+    Fluttertoast.showToast(msg: massage);
   }
 }

@@ -27,6 +27,7 @@ dependencies:
   firebase_auth: ^0.18.1+2
   firebase_core: ^0.5.0+1
   firebase_database: ^4.1.1
+  fluttertoast: ^7.1.6
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +63,7 @@ flutter:
     - family: Brand-Regular
       fonts:
         - asset: fonts/bolt-regular.ttf
-        
+
     - family: Brand-Bold
       fonts:
         - asset: fonts/bolt-semibold.ttf
