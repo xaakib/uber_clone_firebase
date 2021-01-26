@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'AllScreens/loginScreen.dart';
 import 'AllScreens/main_screen.dart';
 
 void main() {
@@ -12,12 +13,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Texi Rider App',
       theme: ThemeData(
+        fontFamily: "Brand-Bold",
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MainScreen(),
+      home: LoginScreen(),
     );
   }
 }

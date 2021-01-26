@@ -12,6 +12,9 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         title: Text("Uber Clone"),
       ),
+      body: Container(
+        color: Colors.red,
+      ),
     );
   }
 }
