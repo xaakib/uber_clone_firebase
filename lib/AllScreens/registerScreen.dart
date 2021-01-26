@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uber_clone_firebase/AllScreens/loginScreen.dart';
+import 'package:uber_clone_firebase/AllScreens/main_screen.dart';
+import 'package:uber_clone_firebase/main.dart';
 
 class Registerscreen extends StatelessWidget {
   static const String idScreen = "register";
@@ -111,7 +113,7 @@ class Registerscreen extends StatelessWidget {
                     if (phoneTextEditingController.text.isEmpty) {
                       displayToastMassage("Phone number is mandatory", context);
                     }
-                    if (passwordTextEditingController.text.length < 7) {
+                    if (passwordTextEditingController.text.length < 6) {
                       displayToastMassage(
                           "Password must be atlast 6 Charactars", context);
                     } else {
@@ -148,19 +150,34 @@ class Registerscreen extends StatelessWidget {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   registernewuser(BuildContext context) async {
-    final User firebaseUser =
-        (await _firebaseAuth.createUserWithEmailAndPassword(
+    final User firebaseUser = (await _firebaseAuth
+            .createUserWithEmailAndPassword(
       email: emailTextEditingController.text,
       password: passwordTextEditingController.text,
-    ))
-            .user;
+    )
+            .catchError((erMassg) {
+      displayToastMassage("Error" + erMassg.toString(), context);
+    }))
+        .user;
 
     if (firebaseUser != null) {
       //user created
-
       //save user info to database
+
+      Map userDataMap = {
+        "name": nameTextEditingController.text.trim(),
+        "email": emailTextEditingController.text.trim(),
+        "phone": phoneTextEditingController.text.trim(),
+      };
+
+      userRef.child(firebaseUser.uid).set(userDataMap);
+      displayToastMassage(
+          "Congratulations, your account hase been created", context);
+      Navigator.pushNamedAndRemoveUntil(
+          context, MainScreen.idScreen, (route) => false);
     } else {
       //error occured - display error msg
+      displayToastMassage("New user account has not been Created", context);
     }
   }
 
