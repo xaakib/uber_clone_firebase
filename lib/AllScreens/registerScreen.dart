@@ -1,8 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uber_clone_firebase/AllScreens/loginScreen.dart';
 
 class Registerscreen extends StatelessWidget {
   static const String idScreen = "register";
+
+  TextEditingController nameTextEditingController = TextEditingController();
+  TextEditingController emailTextEditingController = TextEditingController();
+  TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController phoneTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +40,7 @@ class Registerscreen extends StatelessWidget {
                   height: 1.0,
                 ),
                 TextField(
+                  controller: nameTextEditingController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       labelText: "Name",
@@ -44,6 +51,7 @@ class Registerscreen extends StatelessWidget {
                   height: 1.0,
                 ),
                 TextField(
+                  controller: emailTextEditingController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       labelText: "Email",
@@ -54,6 +62,7 @@ class Registerscreen extends StatelessWidget {
                   height: 1.0,
                 ),
                 TextField(
+                  controller: phoneTextEditingController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       labelText: "Phone",
@@ -64,6 +73,7 @@ class Registerscreen extends StatelessWidget {
                   height: 1.0,
                 ),
                 TextField(
+                  controller: passwordTextEditingController,
                   keyboardType: TextInputType.emailAddress,
                   obscureText: true,
                   decoration: InputDecoration(
@@ -89,7 +99,7 @@ class Registerscreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24)),
                   onPressed: () {
-                    print("Loggedin button clicked");
+                    registernewuser(context);
                   },
                 ),
                 SizedBox(
@@ -117,5 +127,15 @@ class Registerscreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  registernewuser(BuildContext context) async {
+    final User firebaseUser =
+        (await _firebaseAuth.createUserWithEmailAndPassword(
+      email: emailTextEditingController.text,
+      password: passwordTextEditingController.text,
+    ))
+            .user;
   }
 }
