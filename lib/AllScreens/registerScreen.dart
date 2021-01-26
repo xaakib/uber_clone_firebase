@@ -137,5 +137,13 @@ class Registerscreen extends StatelessWidget {
       password: passwordTextEditingController.text,
     ))
             .user;
+
+    if (firebaseUser != null) {
+      //user created
+
+      //save user info to database
+    } else {
+      //error occured - display error msg
+    }
   }
 }
